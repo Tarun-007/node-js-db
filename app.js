@@ -1,5 +1,8 @@
 (async () => {
   const Joi = require("joi");
+
+
+//Database class, can add meta data
   class DB {
     constructor(dbName) {
       this.tables = {};
@@ -13,6 +16,7 @@
     }
   }
 
+  //Query executor, kind of model
   class QueryExecutor {
     constructor(db) {
       this.db = db;
@@ -55,7 +59,8 @@
     }
   }
 
-  let database = new DB("test");
+  // driver code 
+  let database = new DB("test"); 
   let studentSchema = Joi.object({
     name: Joi.string().alphanum().min(3).max(30).required(),
     register_no: Joi.number().integer().min(100000).max(99999).required(),
@@ -75,9 +80,11 @@
     register_no: 100345,
     email: "tarunj12@gmail.com",
   };
+
   let query = new SelectQuery("students", "name", "tarun");
   await model.insert("students", student);
   console.log(database.tables);
   let students = model.select("students", query);
   console.log(students);
+
 })();
