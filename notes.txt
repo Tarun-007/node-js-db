@@ -1,0 +1,46 @@
+class - database
+
+property - tables
+{
+    table1:{data:[{}], schema:{}, indexes:{}}
+
+    table2:{data:[{}], schema:{
+            firstName:{
+                dataType:"",
+                maxLength:
+
+            },
+            RollNo:{
+                dataType:"",
+                maxLength:"",
+                validator <function>:
+            }
+        }}
+    }
+}
+
+Query{
+    type:[insert, select]
+    object:{}
+    tableName:
+}
+
+fun executeQuery(query){
+    queryExecute[query.type](query.tableName, query.obj)
+
+}
+
+queryExecute = {
+    insert:(tableName, obj)=>{
+        validate(db.tableName.schema, obj)
+    }
+
+    select: (tableName, queryObj)=>{
+        try{
+            validate(tableName, queryObj);
+            fetch(queryObj)
+        }
+    }
+}
+
+
